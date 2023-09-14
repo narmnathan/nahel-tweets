@@ -42,3 +42,4 @@ def add(list):
             break
         else:
             list.append(prompt)
+            
