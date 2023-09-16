@@ -1,0 +1,28 @@
+1694829416979	geckodriver	INFO	Listening on 127.0.0.1:51926
+1694829417493	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/4k/8z6dtvcx33s9svtc0q9krc480000gn/T/rust_mozprofileumKbDj"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1694829417811	Marionette	INFO	Marionette enabled
+console.error: "Warning: unrecognized command line flag" "-remote-allow-hosts"
+1694829418285	Marionette	INFO	Listening on port 51937
+WebDriver BiDi listening on ws://127.0.0.1:51927
+Read port: 51937
+1694829418483	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+DevTools listening on ws://127.0.0.1:51927/devtools/browser/f5856651-6c40-4f38-b4f9-9a64b73b0bb2
+1694829419756	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1694829470706	geckodriver	INFO	Listening on 127.0.0.1:52073
+1694829471201	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/4k/8z6dtvcx33s9svtc0q9krc480000gn/T/rust_mozprofilesOdWQM"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1694829471642	Marionette	INFO	Marionette enabled
+console.error: "Warning: unrecognized command line flag" "-remote-allow-hosts"
+1694829472071	Marionette	INFO	Listening on port 52083
+Read port: 52083
+WebDriver BiDi listening on ws://127.0.0.1:52074
+1694829472341	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+DevTools listening on ws://127.0.0.1:52074/devtools/browser/fc8d5ef1-0a13-45d4-9528-6ea1d621fa36
+1694829473863	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
