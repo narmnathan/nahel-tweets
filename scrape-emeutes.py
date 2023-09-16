@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import pandas as pd
 import time
+from fake_useragent import UserAgent
 
 # from selenium-twitter-scraper, refer to guide if necessary
 
@@ -16,6 +17,7 @@ def scrape(link):
     # selenium web driver
     options = webdriver.FirefoxOptions() 
     options.add_argument("-headless")
+    options.set_preference("general.useragent.override", UserAgent().random)
     driver = webdriver.Firefox(options=options)
     driver.get(nitter_link)
     
@@ -65,3 +67,4 @@ df_tweets.to_csv('emeutes-tweets.csv', index=False)
 
 df_errors = pd.DataFrame(errors, columns=[['tweets']])
 df_errors.to_csv('emeutes-errors.csv', index=False)
+
