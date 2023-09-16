@@ -57,4 +57,7 @@ def load(link):
             print('Error!')
             errors.append(link)
 
-
+df_nanterre = pd.read_csv('nanterre.csv')
+df_nanterre['tweets'].apply(load)
+df_tweets = pd.DataFrame(tweets, columns=columns)
+df_tweets.to_csv('nanterre-tweets.csv', index=False)

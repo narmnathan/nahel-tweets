@@ -57,4 +57,7 @@ def load(link):
             print('Error!')
             errors.append(link)
 
-
+df_nahel = pd.read_csv('nahel.csv')
+df_nahel['tweets'].apply(load)
+df_tweets = pd.DataFrame(tweets, columns=columns)
+df_tweets.to_csv('nahel-tweets.csv', index=False)

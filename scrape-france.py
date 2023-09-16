@@ -57,4 +57,7 @@ def load(link):
             print('Error!')
             errors.append(link)
 
-
+df_france = pd.read_csv('france.csv')
+df_france['tweets'].apply(load)
+df_tweets = pd.DataFrame(tweets, columns=columns)
+df_tweets.to_csv('france-tweets.csv', index=False)
