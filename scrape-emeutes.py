@@ -2,8 +2,6 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import pandas as pd
 import time
-from fake_useragent import UserAgent
-
 # from selenium-twitter-scraper, refer to guide if necessary
 
 tweets = []
@@ -12,12 +10,11 @@ columns = ['username', 'tweet_date', 'tweet_text', 'tweet_link', 'media_exists']
 
 def scrape(link):
     # replacing twitter link with nitter to make scraping easier
-    nitter_link = link.replace("twitter.com", "nitter.net", 1)
+    nitter_link = link.replace("twitter.com", "nitter.salastil.com", 1)
     
     # selenium web driver
     options = webdriver.FirefoxOptions() 
     options.add_argument("-headless")
-    options.set_preference("general.useragent.override", UserAgent().random)
     driver = webdriver.Firefox(options=options)
     driver.get(nitter_link)
     
@@ -59,12 +56,12 @@ def load(link):
             print('Error!')
             errors.append(link)
 
-df_emeutes = pd.read_csv('emeutes.csv')
+df_emeutes = pd.read_csv('nanterre.csv')
 df_emeutes['tweets'].apply(load)
 
 df_tweets = pd.DataFrame(tweets, columns=columns)
-df_tweets.to_csv('emeutes-tweets.csv', index=False)
+df_tweets.to_csv('csv/emeutes-tweets.csv', index=False)
 
 df_errors = pd.DataFrame(errors, columns=[['tweets']])
-df_errors.to_csv('emeutes-errors.csv', index=False)
+df_errors.to_csv('csv/emeutes-errors.csv', index=False)
 

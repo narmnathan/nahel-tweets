@@ -3,29 +3,44 @@ from selenium.webdriver.common.by import By
 import pandas as pd
 import time
 import multiprocessing
+import random
+from fake_useragent import UserAgent
+
 
 # from selenium-twitter-scraper, refer to guide if necessary
 
 tweets = []
 errors = [] # for scraping errors
 columns = ['username', 'tweet_date', 'tweet_text', 'tweet_link', 'media_exists']
+proxy_list = pd.read_csv('proxy-list.csv')
+proxies = proxy_list['combined'].tolist()
 
-df_emeutes = pd.read_csv('emeutes.csv')
-df_france = pd.read_csv('france.csv')
-df_franceriots = pd.read_csv('franceriots.csv')
-df_nael = pd.read_csv('nael.csv')
-df_nahel = pd.read_csv('nahel.csv')
-df_nanterre = pd.read_csv('nanterre.csv')
+df_emeutes = pd.read_csv('test.csv')
+df_france = pd.read_csv('test.csv')
+df_franceriots = pd.read_csv('test.csv')
+df_nael = pd.read_csv('test.csv')
+df_nahel = pd.read_csv('test.csv')
+df_nanterre = pd.read_csv('test.csv')
 
 def scrape(link):
     # replacing twitter link with nitter to make scraping easier
-    nitter_link = link.replace("twitter.com", "nitter.net", 1)
+    nitter_link = link.replace("twitter.com", "nitter.salastil.com", 1)
     
     # selenium web driver
     profile = webdriver.FirefoxProfile()
-    profile.set_preference("general.useragent.override", "Mozilla/5.0 (compatible; MSIE 11.0; Windows NT 6.3; Trident/7.0)")
+    profile.set_preference("general.useragent.override", UserAgent().random)
     options = webdriver.FirefoxOptions() 
+    
+    options.profile=profile
     options.add_argument("-headless")
+    options.add_argument("start-maximized")
+    options.add_argument("disable-infobars")
+    options.add_argument("--disable-extensions")
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-application-cache')
+    options.add_argument('--disable-gpu')
+    options.add_argument("--disable-dev-shm-usage")
+    
     driver = webdriver.Firefox(options=options)
     driver.get(nitter_link)
     
@@ -69,7 +84,7 @@ def load(link):
 
 def process(list):
     list['tweets'].apply(load)
-
+    
 if __name__ == "__main__":
     processes = 6
     

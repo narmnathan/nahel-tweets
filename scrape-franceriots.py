@@ -11,7 +11,7 @@ columns = ['username', 'tweet_date', 'tweet_text', 'tweet_link', 'media_exists']
 
 def scrape(link):
     # replacing twitter link with nitter to make scraping easier
-    nitter_link = link.replace("twitter.com", "nitter.net", 1)
+    nitter_link = link.replace("twitter.com", "nitter.salastil.com", 1)
     
     # selenium web driver
     options = webdriver.FirefoxOptions() 
@@ -61,7 +61,7 @@ df_franceriots = pd.read_csv('franceriots.csv')
 df_franceriots['tweets'].apply(load)
 
 df_tweets = pd.DataFrame(tweets, columns=columns)
-df_tweets.to_csv('franceriots-tweets.csv', index=False)
+df_tweets.to_csv('csv/franceriots-tweets.csv', index=False)
 
 df_errors = pd.DataFrame(errors, columns=[['tweets']])
-df_errors.to_csv('franceriots-errors.csv', index=False)
+df_errors.to_csv('csv/franceriots-errors.csv', index=False)
