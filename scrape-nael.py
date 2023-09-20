@@ -11,7 +11,7 @@ columns = ['username', 'tweet_date', 'tweet_text', 'tweet_link', 'media_exists']
 
 def scrape(link):
     # replacing twitter link with nitter to make scraping easier
-    nitter_link = link.replace("twitter.com", "nitter.salastil.com", 1)
+    nitter_link = link.replace("https://twitter.com", "http://nitter.luvvglobal.com", 1)
     
     # selenium web driver
     options = webdriver.FirefoxOptions() 
