@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import pandas as pd
 import concurrent.futures
+
 # from selenium-twitter-scraper, refer to guide if necessary
 
 tweets = []
@@ -10,7 +11,7 @@ columns = ['username', 'tweet_date', 'tweet_text', 'tweet_link', 'media_exists']
 
 def scrape(link):
     # replacing twitter link with nitter to make scraping easier
-    nitter_link = link.replace("https://twitter.com", "http://nitter.luvvglobal.com", 1)
+    nitter_link = link.replace("https://twitter.com", "http://nitter.luvvglobal.com", 1) # my public nitter instance
     
     # selenium web driver
     options = webdriver.FirefoxOptions() 
@@ -49,22 +50,22 @@ def load(link):
         try:
             print('Scraping link: ' + link)
             scrape(link)
-        except Exception as e:
-            print(e)
+        except:
+            print('Error!')
             errors.append(link)
 
 def main():
-    df = pd.read_csv('csv/errors.csv')
+    df = pd.read_csv('emeutes.csv') # replace with csv name!
     links = df['tweets']
     
-    with concurrent.futures.ThreadPoolExecutor(max_workers=7) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=7) as executor: # change max_workers as needed
         executor.map(load, links)
     
     df_tweets = pd.DataFrame(tweets, columns=columns)
     df_errors = pd.DataFrame(errors, columns=[['tweets']])
     
-    df_tweets.to_csv('csv/error2-tweets.csv', index=False)
-    df_errors.to_csv('csv/error-errors.csv', index=False)
+    df_tweets.to_csv('csv/emeutes-tweets.csv', index=False) # replace as needed
+    df_errors.to_csv('csv/emeutes-errors.csv', index=False)
 
 if __name__ == "__main__":
     main()
