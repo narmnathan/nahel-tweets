@@ -1,8 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import pandas as pd
-import time
-
+import concurrent.futures
 # from selenium-twitter-scraper, refer to guide if necessary
 
 tweets = []
@@ -18,9 +17,6 @@ def scrape(link):
     options.add_argument("-headless")
     driver = webdriver.Firefox(options=options)
     driver.get(nitter_link)
-    
-    # waiting for elements to load
-    time.sleep(1)
     
     # getting variables
     username = driver.find_element(By.XPATH, "//a[@class='username']").text
@@ -48,7 +44,7 @@ def add(list):
             break
         else:
             list.append(prompt)
-            
+
 def load(link):
         try:
             print('Scraping link: ' + link)
@@ -57,11 +53,18 @@ def load(link):
             print('Error!')
             errors.append(link)
 
-df_nahel = pd.read_csv('nahel.csv')
-df_nahel['tweets'].apply(load)
+def main():
+    df = pd.read_csv('nahel.csv')
+    links = df['tweets']
+    
+    with concurrent.futures.ThreadPoolExecutor(max_workers=7) as executor:
+        executor.map(load, links)
+    
+    df_tweets = pd.DataFrame(tweets, columns=columns)
+    df_errors = pd.DataFrame(errors, columns=[['tweets']])
+    
+    df_tweets.to_csv('csv/nahel-tweets.csv', index=False)
+    df_errors.to_csv('csv/nahel-errors.csv', index=False)
 
-df_tweets = pd.DataFrame(tweets, columns=columns)
-df_tweets.to_csv('csv/nahel-tweets.csv', index=False)
-
-df_errors = pd.DataFrame(errors, columns=[['tweets']])
-df_errors.to_csv('csv/nahel-errors.csv', index=False)
+if __name__ == "__main__":
+    main()
